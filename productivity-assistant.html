@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A workplace productivity assistant prototype for drafting emails, summarising meeting notes, planning tasks and structuring research.">
+  <title>Productivity Assistant | Moeketsi Mokotedi</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header">
+  <a href="index.html" class="logo">Moeketsi<span>.</span></a>
+  <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  <nav class="navigation" aria-label="Main navigation">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="skills.html">Skills</a>
+    <a href="projects.html">Projects</a><a href="productivity-assistant.html" aria-current="page">Productivity Assistant</a>
+    <a href="education.html">Education &amp; Certs</a><a href="experience.html">Experience</a><a href="contact.html">Contact</a>
+    <a class="nav-download" href="downloads/Moeketsi-Mokotedi-CV.pdf" download>Download CV ↓</a>
+  </nav>
+</header>
+<main class="page-wrap assistant-page">
+  <section class="page-intro">
+    <p class="eyebrow">AI SKILLS PROGRAM · PRACTICAL PROJECT</p>
+    <h1>Workplace Productivity <span class="accent-text">Assistant</span></h1>
+    <p class="lead">A practical collection of small tools to help with everyday workplace writing, meeting follow-up, task planning and research preparation.</p>
+  </section>
+  <section class="prototype-notice" aria-label="Prototype transparency note">
+    <strong>Prototype notice</strong>
+    <p>This version runs in your browser using JavaScript rules and templates. It does not connect to a live AI model, send your text to a server, or perform live web research. Treat outputs as drafts and verify them before using them at work.</p>
+  </section>
+  <nav class="tool-tabs" aria-label="Assistant tools">
+    <button class="tool-tab active" type="button" data-tool="email" aria-selected="true">✉ Email writer</button>
+    <button class="tool-tab" type="button" data-tool="meeting" aria-selected="false">▤ Meeting notes</button>
+    <button class="tool-tab" type="button" data-tool="tasks" aria-selected="false">✓ Task planner</button>
+    <button class="tool-tab" type="button" data-tool="research" aria-selected="false">⌕ Research helper</button>
+    <button class="tool-tab" type="button" data-tool="chat" aria-selected="false">✦ Workplace chatbot</button>
+  </nav>
+  <section class="tool-panel active" id="tool-email">
+    <div class="tool-heading"><p class="eyebrow">TOOL 01</p><h2>Professional email writer</h2><p>Turn a few notes into a clear email draft.</p></div>
+    <form id="email-form" class="assistant-form">
+      <label for="email-recipient">Recipient or audience</label><input id="email-recipient" placeholder="e.g. Hiring manager" required>
+      <label for="email-purpose">Email purpose</label><input id="email-purpose" placeholder="e.g. Follow up on my job application" required>
+      <label for="email-tone">Tone</label><select id="email-tone"><option value="professional">Professional</option><option value="friendly">Friendly</option><option value="formal">Formal</option><option value="concise">Concise</option></select>
+      <label for="email-details">Key details to include</label><textarea id="email-details" rows="4" placeholder="Add relevant dates, context, questions or next steps. Do not include confidential information."></textarea>
+      <button class="button button-primary" type="submit">Generate email draft</button>
+    </form>
+    <div class="output-wrap"><div class="output-head"><h3>Draft output</h3><button class="button button-small copy-output" type="button" data-output="email-output">Copy text</button></div><pre class="assistant-output" id="email-output" aria-live="polite">Your email draft will appear here.</pre></div>
+  </section>
+  <section class="tool-panel" id="tool-meeting" hidden>
+    <div class="tool-heading"><p class="eyebrow">TOOL 02</p><h2>Meeting notes summariser</h2><p>Paste non-confidential notes. The tool separates likely decisions, actions and general points using simple text rules.</p></div>
+    <form id="meeting-form" class="assistant-form">
+      <label for="meeting-notes">Meeting notes</label><textarea id="meeting-notes" rows="8" placeholder="Example: Decision: use the new support checklist&#10;Action: Thabo to test the process by Friday&#10;Discussed recurring password reset requests" required></textarea>
+      <button class="button button-primary" type="submit">Organise notes</button>
+    </form>
+    <div class="output-wrap"><div class="output-head"><h3>Organised summary</h3><button class="button button-small copy-output" type="button" data-output="meeting-output">Copy text</button></div><pre class="assistant-output" id="meeting-output" aria-live="polite">Your meeting summary will appear here.</pre></div>
+  </section>
+  <section class="tool-panel" id="tool-tasks" hidden>
+    <div class="tool-heading"><p class="eyebrow">TOOL 03</p><h2>Task planner</h2><p>Enter one task per line. The planner suggests a priority based on words such as “urgent”, “today” and “deadline”. Check the suggestions against your real commitments.</p></div>
+    <form id="tasks-form" class="assistant-form">
+      <label for="task-list">Tasks (one per line)</label><textarea id="task-list" rows="7" placeholder="Reply to urgent support ticket today&#10;Prepare weekly report by Friday&#10;Read networking documentation" required></textarea>
+      <label for="task-focus">Planning focus</label><select id="task-focus"><option value="balanced">Balanced workload</option><option value="deadline">Deadline first</option><option value="quick">Quick wins first</option></select>
+      <button class="button button-primary" type="submit">Build task plan</button>
+    </form>
+    <div class="output-wrap"><div class="output-head"><h3>Suggested plan</h3><button class="button button-small copy-output" type="button" data-output="tasks-output">Copy text</button></div><pre class="assistant-output" id="tasks-output" aria-live="polite">Your task plan will appear here.</pre></div>
+  </section>
+  <section class="tool-panel" id="tool-research" hidden>
+    <div class="tool-heading"><p class="eyebrow">TOOL 04</p><h2>Research helper</h2><p>Create a structured research plan and reusable prompt. This tool does not browse the web or verify sources.</p></div>
+    <form id="research-form" class="assistant-form">
+      <label for="research-topic">Research topic</label><input id="research-topic" placeholder="e.g. AI in IT support" required>
+      <label for="research-question">Main question or objective</label><textarea id="research-question" rows="3" placeholder="What do you need to find out?" required></textarea>
+      <label for="research-audience">Who is the research for?</label><input id="research-audience" placeholder="e.g. IT team lead, students, general audience">
+      <button class="button button-primary" type="submit">Create research plan</button>
+    </form>
+    <div class="output-wrap"><div class="output-head"><h3>Research plan</h3><button class="button button-small copy-output" type="button" data-output="research-output">Copy text</button></div><pre class="assistant-output" id="research-output" aria-live="polite">Your research plan will appear here.</pre></div>
+  </section>
+  <section class="tool-panel" id="tool-chat" hidden>
+    <div class="tool-heading"><p class="eyebrow">TOOL 05</p><h2>Workplace productivity chatbot</h2><p>Ask for general help with planning, writing, meetings or research. This demo responds with prepared guidance rather than a generative AI model.</p></div>
+    <form id="chat-form" class="assistant-form">
+      <label for="chat-question">Your question</label><textarea id="chat-question" rows="3" placeholder="e.g. How can I prepare for a productive team meeting?" required></textarea>
+      <button class="button button-primary" type="submit">Ask assistant</button>
+    </form>
+    <div class="output-wrap"><div class="output-head"><h3>Response</h3><button class="button button-small copy-output" type="button" data-output="chat-output">Copy text</button></div><pre class="assistant-output" id="chat-output" aria-live="polite">Ask a question to see a suggested response.</pre></div>
+    <div class="quick-prompts"><span>Try:</span><button type="button" class="prompt-chip" data-prompt="How can I prioritise my workday?">Prioritise my day</button><button type="button" class="prompt-chip" data-prompt="How do I write a professional follow-up email?">Follow-up email</button><button type="button" class="prompt-chip" data-prompt="How can I make meetings more effective?">Better meetings</button></div>
+  </section>
+  <section class="responsible-ai content-panel">
+    <h2>Responsible AI checklist</h2>
+    <ul class="detail-list">
+      <li>Remove personal, confidential and company-sensitive information before entering notes.</li>
+      <li>Review every generated draft for accuracy, tone and missing context.</li>
+      <li>Confirm decisions, deadlines, names and action owners with the original source.</li>
+      <li>For research, use reliable sources and independently check citations and claims.</li>
+      <li>Use human judgement for important workplace, employment, security or customer decisions.</li>
+    </ul>
+  </section>
+</main>
+<footer class="site-footer"><p>© 2026 Moeketsi Mokotedi · IT Support &amp; Communication Networks</p><a href="downloads/Moeketsi-Mokotedi-CV.pdf" download>Download my CV (PDF)</a></footer>
+<script src="js/script.js"></script>
+</body>
+</html>
